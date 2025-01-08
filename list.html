@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Updated font */
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fa;
+      background-image: url('https://plus.unsplash.com/premium_photo-1675805884902-06c3b40ce327?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Background image */
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+
+    header {
+      background-color: skin; /* Dark background with transparency */
+      color: black; /* Light text color */
+      padding: 0px;
+      border-radius: 80px;
+      text-align: center;
+      font-size: 28px; /* Increased font size */
+      font-family: 'Arial', sans-serif;
+    }
+
+    nav {
+      background-color: skin; /* Dark background for navigation */
+      overflow: hidden;
+    }
+
+    nav a {
+      color: #f0f0f0; /* Light color for links */
+      padding: 14px 20px;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+      font-size: 18px; /* Font size for links */
+    }
+
+    nav a:hover {
+      background-color: #ddd; /* Hover effect for links */
+      color: #333; /* Text color when hovered */
+    }
+
+    main {
+      padding: 30px;
+      background-color: goldenrod; /* White background with opacity */
+      border-radius: 80px;
+      box-shadow: 0 4px 8px goldenrod;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+
+    .todo-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .todo-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+      background-color: #fff; /* Light background for tasks */
+      padding: 15px;
+      border-radius: 80px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .todo-list li.completed {
+      text-decoration: line-through;
+      background-color: #e0f7fa; /* Light blue background for completed tasks */
+    }
+
+    .todo-list button {
+      background-color: #ff6347; /* Tomato color for delete button */
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .todo-list button:hover {
+      background-color: #d9534f; /* Darker red when hovered */
+    }
+
+    .task-input {
+      padding: 12px;
+      margin-bottom: 20px;
+      width: calc(100% - 24px);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 18px; /* Font size for input field */
+    }
+
+    footer {
+      text-align: center;
+      padding: 12px;
+      background-color: skin; /* Dark footer */
+      color: #000000; /* Light footer text */
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Responsive Design */
+    /* Tablet and below */
+    @media (max-width: 1024px) {
+      .todo-list li {
+        font-size: 16px; /* Smaller font size for tablets */
+      }
+      .task-input {
+        font-size: 16px; /* Slightly smaller font for tablet view */
+      }
+      nav a {
+        font-size: 16px; /* Adjust font size for tablet */
+      }
+    }
+
+    /* Mobile Design */
+    @media (max-width: 768px) {
+      .todo-list li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .task-input {
+        font-size: 16px; /* Font size for mobile devices */
+        width: 100%; /* Full width on small screens */
+      }
+      nav a {
+        font-size: 14px; /* Adjust font size for mobile */
+      }
+      main {
+        padding: 20px;
+        margin: 15px;
+      }
+      footer {
+        font-size: 12px; /* Smaller font for footer on mobile */
+        padding: 10px;
+      }
+    }
+
+    /* Small Mobile Design (portrait mode on phones) */
+    @media (max-width: 480px) {
+      header {
+        font-size: 24px; /* Smaller header font for small screens */
+      }
+      .todo-list li {
+        font-size: 14px; /* Smaller font for tasks on small screens */
+        padding: 12px;
+      }
+      .task-input {
+        font-size: 14px; /* Input field smaller font for small screens */
+      }
+      nav a {
+        font-size: 12px; /* Adjust font size for very small devices */
+        padding: 10px;
+      }
+      footer {
+        font-size: 10px; /* Tiny footer text for small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>To-Do List Application</h1>
+  </header>
+
+  <nav><center>
+    <a href="#" id="homeLink">Home</a>
+    <a href="#" id="contactLink">Contact Us</a>
+    </center>
+  </nav>
+
+  <main>
+    <div id="homePage">
+      <h2><center>Your To-Do List</center></h2>
+      <input type="text" class="task-input" id="taskInput" placeholder="Add a new task..." />
+      <button onclick="addTask()">Add Task</button>
+
+      <ul class="todo-list" id="taskList">
+        <!-- Task list will be dynamically populated here -->
+      </ul>
+    </div>
+
+    <div id="contactPage" style="display:none;">
+      <center><h2>Contact Us</h2>
+      <p>Feel free to reach out to us at:</p>
+      <p>Email: support@todoapp.com</p>
+      <p>Phone: 123-456-7890</p>
+      <button onclick="goHome()">Back to Home</button></center>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 All Rights Are Reserved to To-Do List Application</p>
+  </footer>
+
+  <script>
+    // Load tasks from localStorage on page load
+    document.addEventListener('DOMContentLoaded', loadTasks);
+
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      const taskList = document.getElementById('taskList');
+      taskList.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.classList.toggle('completed', task.completed);
+        li.innerHTML = `  
+          <span onclick="toggleTask(${index})">${task.text}</span>
+          <button onclick="deleteTask(${index})">Delete</button>
+        `;
+        taskList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskText = taskInput.value.trim();
+      if (taskText) {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push({ text: taskText, completed: false });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        taskInput.value = ''; // Clear input field
+        loadTasks();
+      }
+    }
+
+    function toggleTask(index) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks[index].completed = !tasks[index].completed;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    function deleteTask(index) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    // Navigation handling
+    function goHome() {
+      document.getElementById('homePage').style.display = 'block';
+      document.getElementById('contactPage').style.display = 'none';
+    }
+
+    document.getElementById('homeLink').addEventListener('click', goHome);
+
+    document.getElementById('contactLink').addEventListener('click', function() {
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('contactPage').style.display = 'block';
+    });
+
+    // Initial home page load
+    goHome();
+  </script>
+
+</body>
+</html>
